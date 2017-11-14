@@ -10,7 +10,7 @@ The aim for this project is to use model predictive control to choose the right 
 * Steering Angle
 
 In order to do that, we need the vehicle's current state and use this formula to predict the actuators:
-
+[model](model.JPG)
 
 In our state, we have the vehicle's current X and Y positions (in car's local coordinate system), angle, velocity, CTE (cross track error) and angle error.
 
