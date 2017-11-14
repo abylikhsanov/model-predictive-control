@@ -3,6 +3,24 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Reflection
+
+The aim for this project is to use model predictive control to choose the right actuators to control the car. Actuators are:
+* Throttle (Acceleration)
+* Steering Angle
+
+In order to do that, we need the vehicle's current state and use this formula to predict the actuators:
+
+
+In our state, we have the vehicle's current X and Y positions (in car's local coordinate system), angle, velocity, CTE (cross track error) and angle error.
+
+At the beginning, the value for N was 20 and dt = 0.1. After several tests, the car was not behaving well and it is reasonable, as the delay for the calculation is 20x0.1 = 2 seconds. For the car at 70 MPH, 2 seconds is a quite big gap. Therefore, I have changed my N to 10 straightaway and I saw results immediately, they were quite good.
+
+
+From the data, the car's current position (X and Y) are given in map's coordinate system. Therefore, all the data needed to be preprocessed. In order to do that, I have used the formula to transform the values into the car's local values. After the transformation, the car's starting X position will become 0.
+
+At last, the latency of 100 ms was present. In order to cope with a latency, I have multiplied the X and Y positions by the velocity (sin or cos respectively) and by the latency (0.1). The angle has been multiplied by the -velocity/Lf, predicted steer value and latency. Lf is a constant, 2.67. Finally, the angle calculated with latency has been added to the error angle and CTE has been modified by the change in error angle.
+
 ## Dependencies
 
 * cmake >= 3.5
